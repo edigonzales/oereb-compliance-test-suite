@@ -33,6 +33,9 @@ public class App {
         ch.so.agi.oereb.cts.probe.IProbe probe = ProbeFactory.getProbe(xmlProbe.getClassName());
         System.out.println(probe.getClass());
         
+        // mmmh, irgendwie muss ich die Parameter bei den Probes abhandeln .
+        // oder notfalls direkte Url? Dann ist aber resource für nix.
+        
         
         
         Check xmlCheck = xmlProbe.getChecks().get(0);
