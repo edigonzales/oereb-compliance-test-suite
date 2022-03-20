@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cts:suite xmlns:cts="http://geo.so.ch/schema/AGI/OeREB_CTS/" >
+  <description>Kanton XYZ</description>
+  <resource>https://prozessor-oereb.ur.ch/oereb/</resource>
+  <probe>
+    <description>GetEGRID ohne Geometrie mit E/N-Koordinate innerhalb Kantonsgebiet</description>
+    <className>ch.so.agi.oereb.cts.probe.GetEGRID</className>
+    <parameter name="path" value="/getegrid/xml/?en=2690481.2,1195464.8" type="String.class" />
+    <check>
+      <className>ch.so.agi.oereb.cts.check.HttpStatusMatch</className>
+      <parameter name="statusCode" value="200" type="String.class" />
+    </check>
+    <check>
+      <className>ch.so.agi.oereb.cts.check.SchemaValidation</className>
+      <parameter name="schema" value="path/to/xsd" type="String.class" />
+    </check>
+  </probe>
+</cts:suite>
