@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://geo.so.ch/schema/AGI/OeREB_CTS/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cts="http://geo.so.ch/schema/AGI/OeREB_CTS/">
 
-    <xsd:element name="suite" type="cts:Suite"></xsd:element>
+    <xsd:element name="suite" type="cts:XmlSuite"></xsd:element>
 
-    <xsd:complexType name="Suite">
+    <xsd:complexType name="XmlSuite">
     	<xsd:sequence>
     		<xsd:element name="description" type="xsd:normalizedString"
     			minOccurs="0" maxOccurs="1">
@@ -11,11 +11,11 @@
     		<xsd:element name="resource" type="xsd:anyURI" minOccurs="1"
     			maxOccurs="1">
     		</xsd:element>
-    		<xsd:element name="probe" type="cts:Probe" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    		<xsd:element name="probe" type="cts:XmlProbe" minOccurs="0" maxOccurs="unbounded"></xsd:element>
     	</xsd:sequence>
     </xsd:complexType>
 
-    <xsd:complexType name="Probe">
+    <xsd:complexType name="XmlProbe">
     	<xsd:sequence>
     		<xsd:element name="description" type="xsd:normalizedString"
     			minOccurs="0" maxOccurs="1">
@@ -23,25 +23,25 @@
     		<xsd:element name="className" type="xsd:string" minOccurs="1"
     			maxOccurs="1">
     		</xsd:element>
-    		<xsd:element name="parameter" type="cts:Parameter" minOccurs="0"
+    		<xsd:element name="parameter" type="cts:XmlParameter" minOccurs="0"
     			maxOccurs="unbounded">
     		</xsd:element>
-    		<xsd:element name="check" type="cts:Check" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    		<xsd:element name="check" type="cts:XmlCheck" minOccurs="0" maxOccurs="unbounded"></xsd:element>
     	</xsd:sequence>
     </xsd:complexType>
 
-    <xsd:complexType name="Parameter">
+    <xsd:complexType name="XmlParameter">
     	<xsd:attribute name="name" type="xsd:normalizedString" use="required"></xsd:attribute>
     	<xsd:attribute name="value" type="xsd:normalizedString" use="required"></xsd:attribute>
     	<xsd:attribute name="type" type="xsd:string" use="required"></xsd:attribute>
     </xsd:complexType>
 
-    <xsd:complexType name="Check">
+    <xsd:complexType name="XmlCheck">
     	<xsd:sequence>
     		<xsd:element name="className" type="xsd:string" minOccurs="1"
     			maxOccurs="1">
     		</xsd:element>
-    		<xsd:element name="parameter" type="cts:Parameter" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    		<xsd:element name="parameter" type="cts:XmlParameter" minOccurs="0" maxOccurs="unbounded"></xsd:element>
     	</xsd:sequence>
     </xsd:complexType>
 </xsd:schema>
