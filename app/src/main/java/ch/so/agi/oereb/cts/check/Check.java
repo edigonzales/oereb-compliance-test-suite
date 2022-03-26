@@ -6,14 +6,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ch.so.agi.oereb.cts.model.CheckVars;
-import ch.so.agi.oereb.cts.probe.OerebRequest;
+import ch.so.agi.oereb.cts.probe.Probe;
 //import ch.so.agi.healthcheck.model.CheckVarsDTO;
 import ch.so.agi.oereb.cts.probe.Probe;
 
 public abstract class Check implements ICheck {
     final Logger log = LoggerFactory.getLogger(Check.class);
 
-    protected OerebRequest probe;
+    protected Probe probe;
     
     private CheckResult result;
     
@@ -23,7 +23,7 @@ public abstract class Check implements ICheck {
         result.start();
     }
     
-    public void setProbe(OerebRequest oerebRequest) {
+    public void setProbe(Probe oerebRequest) {
         this.probe = oerebRequest;
     }
     

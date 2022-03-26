@@ -3,9 +3,9 @@ package ch.so.agi.oereb.cts.probe;
 import ch.so.agi.oereb.cts.Result;
 
 public class ProbeResult extends Result {
-    private OerebRequest probe;
+    private Probe probe;
     
-    public ProbeResult(OerebRequest oerebRequest) {
+    public ProbeResult(Probe oerebRequest) {
         this.probe = oerebRequest;
         this.className = oerebRequest.getClass().getCanonicalName();
     }

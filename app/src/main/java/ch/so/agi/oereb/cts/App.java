@@ -19,10 +19,7 @@ import ch.so.agi.oereb.cts.check.CheckFactory;
 import ch.so.agi.oereb.cts.model.CheckVars;
 import ch.so.agi.oereb.cts.model.CheckVarsBuilder;
 import ch.so.agi.oereb.cts.model.Parameter;
-import ch.so.agi.oereb.cts.probe.GetEGRID;
-import ch.so.agi.oereb.cts.probe.IProbe;
-import ch.so.agi.oereb.cts.probe.OerebRequest;
-import ch.so.agi.oereb.cts.probe.ProbeFactory;
+import ch.so.agi.oereb.cts.probe.Probe;
 import ch.so.geo.schema.agi.oereb_cts.Suite;
 import ch.so.geo.schema.agi.oereb_cts.XmlSuite;
 import ch.so.geo.schema.agi.oereb_cts.XmlCheck;
@@ -55,7 +52,7 @@ public class App {
               checksVars.add(checkVars);
           }
 
-          OerebRequest probe = new OerebRequest(baseUrl + "getegrid/xml/?EN=" + eastNorthCoord, checksVars);
+          Probe probe = new Probe(baseUrl + "getegrid/xml/?EN=" + eastNorthCoord, checksVars);
           probe.setDescription("fubar");
           probe.run();
           
@@ -73,8 +70,6 @@ public class App {
       
       
 
-      IProbe probe = ProbeFactory.getProbe("ch.so.agi.oereb.cts.probe.GetEGRID");
-      //probe.set
         
 //        JAXBContext jaxbContext = JAXBContext.newInstance(Suite.class);
 //        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
