@@ -81,7 +81,6 @@ public class OerebRequest {
 //        HttpHeaders headers = response.headers();
 //        headers.map().forEach((k, v) -> System.out.println(k + ":" + v));
 
-
     };
     
     private void runChecks(List<CheckVars> checksVars) throws IOException {
@@ -92,7 +91,6 @@ public class OerebRequest {
 
             probeResult.addResult(check.getResult());
         }
-
     }
     
     public ProbeResult getProbeResult() {

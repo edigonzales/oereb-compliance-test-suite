@@ -22,8 +22,6 @@ public class HttpStatusMatch extends Check {
             return;
         }
         
-        System.out.println(serverStatusCode);
-        
         this.setResult(false, "HTTP status " + String.valueOf(serverStatusCode) + " does not match expected status " + statusCode);
     }
 
