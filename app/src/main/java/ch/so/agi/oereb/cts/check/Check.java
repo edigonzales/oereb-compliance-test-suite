@@ -23,8 +23,8 @@ public abstract class Check implements ICheck {
         result.start();
     }
     
-    public void setProbe(Probe oerebRequest) {
-        this.probe = oerebRequest;
+    public void setProbe(Probe probe) {
+        this.probe = probe;
     }
     
     public void setResult(boolean success, String message) {
