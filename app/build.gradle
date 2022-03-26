@@ -4,11 +4,11 @@ plugins {
 
 apply from: "$rootDir/gradle/versioning.gradle"
 
-sourceCompatibility = '11'
-targetCompatibility = '11'
+sourceCompatibility = '17'
+targetCompatibility = '17'
 
 compileJava {
-    options.compilerArgs.addAll(['--release', '11'])
+    options.compilerArgs.addAll(['--release', '17'])
 }
 
 configurations {
@@ -38,7 +38,7 @@ task genJaxb {
                 produces(dir: sourcesDir, includes: "**/*.java")
             }
 
-            javac(destdir: classesDir, source: 11, target: 11, debug: true,
+            javac(destdir: classesDir, source: 17, target: 17, debug: true,
                     debugLevel: "lines,vars,source", includeantruntime: false,
                     classpath: configurations.jaxb.asPath) {
                 src(path: sourcesDir)
@@ -60,6 +60,12 @@ dependencies {
     
     implementation 'org.slf4j:slf4j-api:1.7.36'
     implementation 'org.slf4j:slf4j-simple:1.7.36'
+    
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.2'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.2'  
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.2'
 
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
     implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1' // Braucht es zur Laufzeit.

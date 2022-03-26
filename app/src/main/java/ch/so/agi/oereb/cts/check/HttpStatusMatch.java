@@ -4,23 +4,16 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-//import com.fasterxml.jackson.databind.ObjectMapper;
-
-//import ch.so.agi.healthcheck.model.CheckVarsDTO;
-//import ch.so.agi.healthcheck.probe.ParamDefinition;
+import ch.so.agi.oereb.cts.model.CheckVars;
 
 public class HttpStatusMatch extends Check {
-    //@ParamDefinition(name = "statusCode", description = "The HTTP status code to match.")
     private String statusCode;
 
     @Override
-    //public void perform(CheckVarsDTO checkVars) throws IOException {
-    public void perform() throws IOException {
+    public void perform(CheckVars checkVars) throws IOException {
         log.info("Check: " + this.getClass().getCanonicalName());
-        
-//        Map<String, Object> paramsMap = null;
-//        paramsMap = new ObjectMapper().readValue(checkVars.getParameters(), HashMap.class);
-//        statusCode = (String) paramsMap.get("statusCode");
+                
+        statusCode = checkVars.parameters().get("statusCode").value();
 
         int serverStatusCode = this.probe.getResponse().statusCode();
         
@@ -28,6 +21,8 @@ public class HttpStatusMatch extends Check {
             this.setResult(true, "OK");
             return;
         }
+        
+        System.out.println(serverStatusCode);
         
         this.setResult(false, "HTTP status " + String.valueOf(serverStatusCode) + " does not match expected status " + statusCode);
     }

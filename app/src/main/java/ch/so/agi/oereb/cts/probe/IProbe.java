@@ -6,17 +6,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public interface IProbe {    
-//    public Map<String, String> getRequestHeaders();
+    public Map<String, String> getRequestHeaders();
     
-//    public String getRequestMethod();
+    public String getRequestMethod();
     
-//    public String getRequestTemplate();
+    public String getRequestTemplate();
     
     public String getName();
     
-    public String setName(String name);
-    
     public String getDescription();
-    
-    public String setDescription(String description);
 }

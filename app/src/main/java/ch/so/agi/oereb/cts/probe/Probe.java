@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ch.so.agi.oereb.cts.check.Check;
+import ch.so.agi.oereb.cts.model.Parameter;
 
 //import com.fasterxml.jackson.core.JsonProcessingException;
 //import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,11 +43,22 @@ public abstract class Probe implements IProbe {
     
     protected String requestUrl;
     
-//    public Probe(String requestUrl) {
-//        this.requestUrl = requestUrl;
-//    }
+    protected List<Parameter> requestParameters;
     
+    protected String requestTemplate;
+        
     //public void beforeRequest() {};
+    
+
+    public void init(String resourceUrl, List<Parameter> requestParameters, String requestTemplate) {
+        this.requestUrl = resourceUrl;
+        this.requestParameters = requestParameters;
+        this.requestTemplate = requestTemplate;
+        
+        System.out.println(requestUrl);     
+        System.out.println(requestTemplate);
+        System.out.println(requestParameters);
+    }
     
     public void performRequest(String resourceUrl, String requestParameters, String requestTemplate,
             String requestMethod, Map<String, String> requestHeaders) throws IOException, InterruptedException {
