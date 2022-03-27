@@ -1,6 +1,14 @@
 plugins {
     id 'application'
+  id 'org.openjfx.javafxplugin' version '0.0.10'
+
 }
+
+javafx {
+    version = "17.0.1"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
 
 apply from: "$rootDir/gradle/versioning.gradle"
 
@@ -66,6 +74,8 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.2'
+
+    implementation 'com.formdev:flatlaf:2.1'
 
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
     implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1' // Braucht es zur Laufzeit.
