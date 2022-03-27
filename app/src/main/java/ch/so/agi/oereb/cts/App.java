@@ -39,15 +39,21 @@ public class App {
       
       {
           List<CheckVars> checksVars = new ArrayList<>();
+//          {
+//              var checkVars = new CheckVarsBuilder("ch.so.agi.oereb.cts.check.HttpStatusMatch")
+//                      .addParameter(new Parameter("statusCode", "201"))
+//                      .build();
+//              checksVars.add(checkVars);
+//          }
+//          {
+//              var checkVars = new CheckVarsBuilder("ch.so.agi.oereb.cts.check.HttpStatusMatch")
+//                      .addParameter(new Parameter("statusCode", "204"))
+//                      .build();
+//              checksVars.add(checkVars);
+//          }
           {
-              var checkVars = new CheckVarsBuilder("ch.so.agi.oereb.cts.check.HttpStatusMatch")
-                      .addParameter(new Parameter("statusCode", "201"))
-                      .build();
-              checksVars.add(checkVars);
-          }
-          {
-              var checkVars = new CheckVarsBuilder("ch.so.agi.oereb.cts.check.HttpStatusMatch")
-                      .addParameter(new Parameter("statusCode", "204"))
+              var checkVars = new CheckVarsBuilder("ch.so.agi.oereb.cts.check.SchemaValidation")
+                      .addParameter(new Parameter("xsd", "oereb_v2_0/Extract.xsd"))
                       .build();
               checksVars.add(checkVars);
           }
@@ -60,7 +66,7 @@ public class App {
           System.out.println(probeResultXml);
           for (Result result : probe.getProbeResult().getResults()) {
               String xml = xmlMapper.writeValueAsString(result);
-              System.out.println(xml);
+              //System.out.println(xml);
 
           }
           

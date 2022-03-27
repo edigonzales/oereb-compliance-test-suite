@@ -13,6 +13,8 @@ public class CheckFactory {
 //            return new ch.so.agi.healthcheck.check.HttpStatusNoError();
         } else if (probeCheck.equalsIgnoreCase("ch.so.agi.oereb.cts.check.HttpStatusMatch")) {
             return new ch.so.agi.oereb.cts.check.HttpStatusMatch();
+        } else if (probeCheck.equalsIgnoreCase("ch.so.agi.oereb.cts.check.SchemaValidation")) {
+            return new ch.so.agi.oereb.cts.check.SchemaValidation();
 //        } else if (probeCheck.equalsIgnoreCase("ch.so.agi.healthcheck.check.HasUniqueWmsLayerIdentifiers")) {
 //            return new ch.so.agi.healthcheck.check.HasUniqueWmsLayerIdentifiers();
 //        } else if (probeCheck.equalsIgnoreCase("ch.so.agi.healthcheck.check.HttpHasHeaderValue")) {

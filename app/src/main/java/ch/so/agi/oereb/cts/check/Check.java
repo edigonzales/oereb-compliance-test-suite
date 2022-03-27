@@ -37,5 +37,5 @@ public abstract class Check implements ICheck {
         return this.result;
     } 
     
-    public abstract void perform(CheckVars checkVars) throws IOException;
+    public abstract void perform(CheckVars checkVars);
 }

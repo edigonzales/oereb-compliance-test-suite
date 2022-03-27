@@ -10,7 +10,7 @@ public class HttpStatusMatch extends Check {
     private String statusCode;
 
     @Override
-    public void perform(CheckVars checkVars) throws IOException {
+    public void perform(CheckVars checkVars) {
         log.info("Check: " + this.getClass().getCanonicalName());
                 
         statusCode = checkVars.parameters().get("statusCode").value();
