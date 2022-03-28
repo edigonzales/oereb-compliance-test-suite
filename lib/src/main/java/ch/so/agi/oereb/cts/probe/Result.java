@@ -1,4 +1,4 @@
-package ch.so.agi.oereb.cts;
+package ch.so.agi.oereb.cts.probe;
 
 import java.time.Duration;
 import java.time.Instant;

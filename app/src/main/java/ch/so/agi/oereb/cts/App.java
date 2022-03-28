@@ -6,27 +6,12 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.formdev.flatlaf.FlatLightLaf;
 
 import ch.so.agi.oereb.cts.check.CheckFactory;
 import ch.so.agi.oereb.cts.model.CheckVars;
 import ch.so.agi.oereb.cts.model.CheckVarsBuilder;
 import ch.so.agi.oereb.cts.model.Parameter;
 import ch.so.agi.oereb.cts.probe.Probe;
-import ch.so.geo.schema.agi.oereb_cts.Suite;
-import ch.so.geo.schema.agi.oereb_cts.XmlSuite;
-import ch.so.geo.schema.agi.oereb_cts.XmlCheck;
-import ch.so.geo.schema.agi.oereb_cts.XmlProbe;
 
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -47,7 +32,6 @@ import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
@@ -62,7 +46,9 @@ public class App extends Application {
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
-        grid.setGridLinesVisible(true);
+        //grid.setGridLinesVisible(true);
+        
+            grid.setStyle("-fx-font-family: \"Frutiger 55 Roman\";");
         
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setHgrow(Priority.NEVER);        
@@ -71,27 +57,37 @@ public class App extends Application {
 
         grid.getColumnConstraints().addAll(col1, col2);
         
-        Text scenetitle = new Text("Welcome Welcome Welcome Welcome");
-         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        Text scenetitle = new Text("ÖREB-Kataster Compliance Test Suite");
+        scenetitle.setFont(Font.font(Font.getDefault().getName(), FontWeight.NORMAL, 20));
+        scenetitle.setStyle("-fx-font-family: Roboto; -fx-font-size: 20;");
+
         grid.add(scenetitle, 0, 0, 2, 1);
 
         Label baseUrlLbl = new Label("Base Url:");
         grid.add(baseUrlLbl, 0, 1);
 
-        TextField userTextField = new TextField();
-        grid.add(userTextField, 1, 1);
+        TextField baseUrlLblTxtFld = new TextField();
+        grid.add(baseUrlLblTxtFld, 1, 1);
 
 //        Button browseBtn = new Button("Browse");
 //        grid.add(browseBtn, 2, 1);
 
+        Label emptyLbl = new Label("GetEGRID Parameter");
+        emptyLbl.setFont(Font.font("Roboto", FontWeight.BOLD, Font.getDefault().getSize()));
+        emptyLbl.setStyle("-fx-font-family: Roboto; -fx-font-size: 13;");
+
+        grid.add(emptyLbl, 0, 2, 2, 1);
+        
         Label pw = new Label("Password:");
-        grid.add(pw, 0, 2);
+        grid.add(pw, 0, 3);
 
         PasswordField pwBox = new PasswordField();
-        grid.add(pwBox, 1, 2);
+        grid.add(pwBox, 1, 3);
 
         Scene scene = new Scene(grid, 600, 400);
+        scene.getStylesheets().add("http://fonts.googleapis.com/css?family=Roboto");
         primaryStage.setScene(scene);
+        
 
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -137,7 +133,7 @@ public class App extends Application {
 //        primaryStage.show();
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException, JAXBException {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
 //System.setProperty("prism.lcdtext", "false");
 //System.setProperty("prism.text", "t2k");

@@ -1,6 +1,6 @@
 package ch.so.agi.oereb.cts.check;
 
-import ch.so.agi.oereb.cts.Result;
+import ch.so.agi.oereb.cts.probe.Result;
 
 public class CheckResult extends Result {
     private Check check;

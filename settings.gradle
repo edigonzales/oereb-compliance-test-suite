@@ -8,4 +8,5 @@
  */
 
 rootProject.name = 'oereb-compliance-test-suite'
+include('lib')
 include('app')

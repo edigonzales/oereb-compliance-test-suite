@@ -1,0 +1,85 @@
+plugins {
+    id 'java'
+}
+
+
+apply from: "$rootDir/gradle/versioning.gradle"
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+compileJava {
+    options.compilerArgs.addAll(['--release', '17'])
+}
+
+configurations {
+    jaxb
+}
+
+repositories {
+    mavenCentral()
+}
+
+task genJaxb {
+    ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
+    ext.classesDir = "${buildDir}/classes/jaxb"
+    ext.schema = "src/main/resources/xsd/OeREB_CTS_V0_1.xsd"
+
+    outputs.dir classesDir
+
+    doLast() {
+        project.ant {
+            taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
+                    classpath: configurations.jaxb.asPath
+            mkdir(dir: sourcesDir)
+            mkdir(dir: classesDir)
+
+            xjc(destdir: sourcesDir, schema: schema, binding: "src/main/resources/xsd/binding.xjb") {
+                arg(value: "-extension")
+                produces(dir: sourcesDir, includes: "**/*.java")
+            }
+
+            javac(destdir: classesDir, source: 17, target: 17, debug: true,
+                    debugLevel: "lines,vars,source", includeantruntime: false,
+                    classpath: configurations.jaxb.asPath) {
+                src(path: sourcesDir)
+                include(name: "**/*.java")
+                include(name: "*.java")
+            }
+
+            copy(todir: classesDir) {
+                fileset(dir: sourcesDir, erroronmissingdir: false) {
+                    exclude(name: "**/*.java")
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    
+    implementation 'org.slf4j:slf4j-api:1.7.36'
+    implementation 'org.slf4j:slf4j-simple:1.7.36'
+    
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.2'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.2'  
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.2'
+
+    implementation 'com.formdev:flatlaf:2.1'
+
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1' // Braucht es zur Laufzeit.
+    implementation 'com.sun.xml.bind:jaxb-impl:2.3.2'
+    implementation 'javax.activation:activation:1.1.1'
+    implementation(files(genJaxb.classesDir).builtBy(genJaxb))
+
+    jaxb 'org.glassfish.jaxb:jaxb-xjc:2.3.2'
+    jaxb 'com.sun.xml.bind:jaxb-impl:2.3.2'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
