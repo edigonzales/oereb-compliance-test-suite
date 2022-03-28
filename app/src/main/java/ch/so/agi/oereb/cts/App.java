@@ -72,7 +72,7 @@ public class App extends Application {
         grid.getColumnConstraints().addAll(col1, col2);
         
         Text scenetitle = new Text("Welcome Welcome Welcome Welcome");
-        // scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         grid.add(scenetitle, 0, 0, 2, 1);
 
         Label baseUrlLbl = new Label("Base Url:");
@@ -138,6 +138,10 @@ public class App extends Application {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException, JAXBException {
+
+//System.setProperty("prism.lcdtext", "false");
+//System.setProperty("prism.text", "t2k");
+
 
         launch(args);
 
