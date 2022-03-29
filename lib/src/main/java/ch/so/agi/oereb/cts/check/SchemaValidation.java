@@ -79,7 +79,6 @@ public class SchemaValidation extends Check {
 
             String errorMessage = new String();
             for(SAXParseException exception : exceptions) {
-                System.out.println(exception.getMessage());
                 errorMessage += exception.getMessage() + "\n";
             }
             this.setResult(false, "Response is not valid:\n" + errorMessage);
