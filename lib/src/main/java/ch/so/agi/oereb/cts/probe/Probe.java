@@ -13,15 +13,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.text.StringSubstitutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ch.so.agi.oereb.cts.check.Check;
 import ch.so.agi.oereb.cts.check.CheckFactory;
 import ch.so.agi.oereb.cts.model.CheckVars;
+import ch.so.agi.oereb.cts.model.ProbeConfig;
 
 public class Probe {
     final Logger log = LoggerFactory.getLogger(Probe.class);
+    
+    private ProbeConfig probeConfig;
     
     private ProbeResult probeResult;
 
@@ -35,22 +39,28 @@ public class Probe {
     
     private HttpResponse<?> response;
    
-    public Probe(String requestUrl, List<CheckVars> checksVars) {
-        this.requestUrl = requestUrl;
-        this.checksVars = checksVars;
+    public Probe(ProbeConfig probeConfig) {
+        //this.requestUrl = requestUrl;
+        this.description = probeConfig.description();
+        this.probeConfig = probeConfig;
+        this.checksVars = probeConfig.checksVars();
     }
     
     public void run() throws IOException, InterruptedException {        
         log.info("Performing: " + this.getClass().getCanonicalName());
+        
+        var subsitutor = new StringSubstitutor(probeConfig.requestParams());
+        var resolvedRequestTemplate = subsitutor.replace(probeConfig.requestTemplate());
+        requestUrl = fixUrl(probeConfig.serviceEndpoint() + "/" + resolvedRequestTemplate);
 
-        probeResult = new ProbeResult(this);
+        probeResult = new ProbeResult(/*this*/);
+        probeResult.setRequest(requestUrl);
         probeResult.setDescription(getDescription());
         probeResult.start();
 
         performRequest();
         runChecks(checksVars);
         
-        probeResult.setRequest(request.uri().toASCIIString());
         probeResult.stop();     
     };
     
@@ -107,5 +117,10 @@ public class Probe {
 
     public String setDescription(String description) {
         return this.description = description;
+    }
+    
+    // Entfernt doppelte Slashes
+    private String fixUrl(String url) {
+        return url.replaceAll("(?<=[^:\\s])(\\/+\\/)", "/");
     }
 }

@@ -18,7 +18,7 @@ public abstract class Check implements ICheck {
     private CheckResult result;
     
     public Check() {
-        result = new CheckResult(this);
+        result = new CheckResult(this.getClass().getCanonicalName());
         result.setDescription(getDescription());
         result.start();
     }

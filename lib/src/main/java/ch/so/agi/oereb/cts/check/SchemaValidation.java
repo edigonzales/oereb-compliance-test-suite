@@ -1,6 +1,5 @@
 package ch.so.agi.oereb.cts.check;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedList;
@@ -10,7 +9,6 @@ import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
@@ -81,12 +79,11 @@ public class SchemaValidation extends Check {
             for(SAXParseException exception : exceptions) {
                 errorMessage += exception.getMessage() + "\n";
             }
-            this.setResult(false, "Response is not valid:\n" + errorMessage);
+            this.setResult(false, errorMessage);
             
         } catch (SAXException | ParserConfigurationException | IOException e) {
-            this.setResult(false, "Response is not valid: " + e.getMessage());
+            this.setResult(false, e.getMessage());
             return;
         }
     }
-
 }

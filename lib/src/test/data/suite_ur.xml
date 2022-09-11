@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cts:Suite xmlns:cts="http://geo.so.ch/schema/AGI/OeREB_CTS/" >
+  <Description>Kanton Solothurn</Description>
+  <ServiceEndpoint>https://geo.so.ch/api/oereb/</ServiceEndpoint>
+  <Probe>
+    <Description>GetEGRID .... </Description>
+    <RequestTemplate>/getegrid/xml/?EN=${EN}</RequestTemplate>
+    <RequestParameter name="EN" value="2690481.2,1195464.8"/>
+    <Check>
+      <ClassName>ch.so.agi.oereb.cts.check.HttpStatusMatch</ClassName>
+      <Parameter name="statusCode" value="200" />
+    </Check>
+    <Check>
+      <ClassName>ch.so.agi.oereb.cts.check.SchemaValidation</ClassName>
+      <Parameter name="xsd" value="oereb_v2_0/Extract.xsd" />
+    </Check>
+  </Probe>
+</cts:Suite>

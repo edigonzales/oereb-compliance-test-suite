@@ -2,7 +2,6 @@ plugins {
     id 'java'
 }
 
-
 apply from: "$rootDir/gradle/versioning.gradle"
 
 sourceCompatibility = '17'
@@ -56,6 +55,20 @@ task genJaxb {
     }
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java',"${buildDir}/generated-sources/jaxb"]
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+    }
+}
+
+
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     
@@ -68,7 +81,9 @@ dependencies {
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.2'
 
-    implementation 'com.formdev:flatlaf:2.1'
+    implementation 'org.apache.commons:commons-text:1.9'
+
+    //implementation 'com.formdev:flatlaf:2.1'
 
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
     implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1' // Braucht es zur Laufzeit.

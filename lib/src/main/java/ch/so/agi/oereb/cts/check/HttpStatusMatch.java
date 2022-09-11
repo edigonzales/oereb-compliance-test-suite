@@ -1,9 +1,5 @@
 package ch.so.agi.oereb.cts.check;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
 import ch.so.agi.oereb.cts.model.CheckVars;
 
 public class HttpStatusMatch extends Check {

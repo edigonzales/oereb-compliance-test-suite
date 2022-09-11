@@ -8,6 +8,8 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public abstract class Result {
@@ -17,7 +19,7 @@ public abstract class Result {
 
     protected boolean success = true;
     
-    protected String message = "OK";
+    protected String message;
     
     protected String request;
     
@@ -27,6 +29,8 @@ public abstract class Result {
     
     protected double responseTimeSecs = -1;
     
+    @JacksonXmlElementWrapper(localName = "checkResults")
+    @JacksonXmlProperty(localName = "check")
     protected List<Result> results = new ArrayList<Result>();
     
     @JsonIgnore
@@ -114,7 +118,8 @@ public abstract class Result {
         this.resultsFailed = resultsFailed;
     }
 
-    /*
+    /* TODO: Momentan auskommentiert. Weiss nicht, ob das eher verwirrt.
+     * 
      * Negative Resultate werden nach oben durchgereicht.
      * D.h. es reicht ein negatives Result, damit Probe
      * und Resource auch negativ sind.
@@ -125,7 +130,8 @@ public abstract class Result {
         if (!result.success) {
             this.success = false;
             this.resultsFailed.add(result);
-            this.message = this.resultsFailed.get(0).getMessage();
+            //
+            //this.message = this.resultsFailed.get(0).getMessage();
         } 
 //        else {
 //            this.success = true;

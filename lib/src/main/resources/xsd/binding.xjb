@@ -4,10 +4,11 @@
     <jxb:globalBindings>
       <xjc:simple />
     </jxb:globalBindings>
+    <!--
     <jxb:bindings node="//xsd:element[@name='suite']">
         <jxb:class name="XmlSuite"/>
     </jxb:bindings>
-
+    -->
     
   </jxb:bindings>
 
