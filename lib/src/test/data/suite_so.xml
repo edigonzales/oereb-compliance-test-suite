@@ -4,7 +4,7 @@
   <ServiceEndpoint>https://geo.so.ch/api/oereb/</ServiceEndpoint>
   <!-- 
   <Probe>
-    <Description>GetEGRID by EN without parameter</Description>
+    <Description>GetEGRID by EN without any parameter</Description>
     <RequestTemplate>/getegrid/xml/?EN=${EN}</RequestTemplate>
     <RequestParameter name="EN" value="2600595,1215629"/>
     <Check>
@@ -17,6 +17,9 @@
     </Check>
   </Probe>
    -->
+   
+   <!-- TODO rename Parameter to Assertion -->
+   
   <Probe>
     <Description>GetEGRID by EN with geometry parameter</Description>
     <RequestTemplate>/getegrid/xml/?EN=${EN}&amp;GEOMETRY=true</RequestTemplate>

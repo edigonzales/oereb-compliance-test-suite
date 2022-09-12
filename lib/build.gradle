@@ -19,6 +19,11 @@ repositories {
     mavenCentral()
 }
 
+// "The package javax.xml.xxx is accessible from more than one module: <unnamed>, java.xml"
+configurations {
+    all*.exclude group: 'xml-apis'
+}
+
 task genJaxb {
     ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
     ext.classesDir = "${buildDir}/classes/jaxb"
