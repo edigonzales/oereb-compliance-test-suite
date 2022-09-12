@@ -28,7 +28,9 @@ public abstract class Check implements ICheck {
     }
     
     public void setResult(boolean success, String message) {
-        result.setMessage(message);
+        if (!success) {
+            result.setMessage(message);            
+        }
         result.setSuccess(success);
         result.stop();
     }

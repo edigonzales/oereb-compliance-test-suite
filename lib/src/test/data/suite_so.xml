@@ -2,10 +2,11 @@
 <cts:Suite xmlns:cts="http://geo.so.ch/schema/AGI/OeREB_CTS/" >
   <Description>Kanton Solothurn</Description>
   <ServiceEndpoint>https://geo.so.ch/api/oereb/</ServiceEndpoint>
+  <!-- 
   <Probe>
-    <Description>GetEGRID .... </Description>
+    <Description>GetEGRID by EN without parameter</Description>
     <RequestTemplate>/getegrid/xml/?EN=${EN}</RequestTemplate>
-    <RequestParameter name="EN" value="2690481.2,1195464.8"/>
+    <RequestParameter name="EN" value="2600595,1215629"/>
     <Check>
       <ClassName>ch.so.agi.oereb.cts.check.HttpStatusMatch</ClassName>
       <Parameter name="statusCode" value="200" />
@@ -13,6 +14,25 @@
     <Check>
       <ClassName>ch.so.agi.oereb.cts.check.SchemaValidation</ClassName>
       <Parameter name="xsd" value="oereb_v2_0/Extract.xsd" />
+    </Check>
+  </Probe>
+   -->
+  <Probe>
+    <Description>GetEGRID by EN with geometry parameter</Description>
+    <RequestTemplate>/getegrid/xml/?EN=${EN}&amp;GEOMETRY=true</RequestTemplate>
+    <RequestParameter name="EN" value="2600595,1215629"/>
+    <Check>
+      <ClassName>ch.so.agi.oereb.cts.check.HttpStatusMatch</ClassName>
+      <Parameter name="statusCode" value="200" />
+    </Check>
+    <Check>
+      <ClassName>ch.so.agi.oereb.cts.check.SchemaValidation</ClassName>
+      <Parameter name="xsd" value="oereb_v2_0/Extract.xsd" />
+    </Check>
+    <Check>
+      <ClassName>ch.so.agi.oereb.cts.check.GeometryNodesCounter</ClassName>
+      <Parameter name="count" value="1" />
+      <Parameter name="min" value="1" />
     </Check>
   </Probe>
 </cts:Suite>

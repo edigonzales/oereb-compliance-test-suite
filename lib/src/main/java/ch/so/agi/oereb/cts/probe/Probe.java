@@ -2,10 +2,12 @@ package ch.so.agi.oereb.cts.probe;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URLDecoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpHeaders;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.net.http.HttpClient.Redirect;
 import java.net.http.HttpClient.Version;
 import java.net.http.HttpRequest.Builder;
@@ -51,7 +53,8 @@ public class Probe {
         
         var subsitutor = new StringSubstitutor(probeConfig.requestParams());
         var resolvedRequestTemplate = subsitutor.replace(probeConfig.requestTemplate());
-        requestUrl = fixUrl(probeConfig.serviceEndpoint() + "/" + resolvedRequestTemplate);
+        requestUrl = URLDecoder.decode(probeConfig.serviceEndpoint() + "/" + resolvedRequestTemplate, StandardCharsets.UTF_8.name());
+        requestUrl = fixUrl(requestUrl);
 
         probeResult = new ProbeResult(/*this*/);
         probeResult.setRequest(requestUrl);

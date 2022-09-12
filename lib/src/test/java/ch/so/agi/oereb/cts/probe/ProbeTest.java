@@ -3,6 +3,7 @@ package ch.so.agi.oereb.cts.probe;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.util.StdDateFormat;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
@@ -32,14 +33,12 @@ public class ProbeTest  {
     
     @Test
     public void bar() throws Exception {
+        // TODO: nur in Kombination mit Annotationen im POJO.
         XmlMapper xmlMapper = new XmlMapper();
         xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
         xmlMapper.registerModule(new JavaTimeModule());
-        
-        // FIXME
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        df.setTimeZone(TimeZone.getTimeZone("Europe/Zurich"));
-        xmlMapper.setDateFormat(df);
+        xmlMapper.setTimeZone(TimeZone.getTimeZone("Europe/Zurich"));
+        xmlMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
         var probesConfig = XmlSuiteParser.parse("./src/test/data/suite_so.xml");
         for (var probeConfig : probesConfig) {
